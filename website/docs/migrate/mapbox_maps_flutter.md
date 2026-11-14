@@ -28,7 +28,7 @@ sources, sprites and glyphs with your own URLs.
 
 ```bash
 flutter pub remove mapbox_maps_flutter
-flutter pub add maplibre:^0.4.0-pre.2
+flutter pub add maplibre:^0.4.0-pre.3
 ```
 
 Remove `MapboxOptions.setAccessToken`, the access token from your build

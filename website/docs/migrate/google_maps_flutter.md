@@ -25,7 +25,7 @@ file. Without a style, the map shows the MapLibre demo tiles.
 
 ```bash
 flutter pub remove google_maps_flutter
-flutter pub add maplibre:^0.4.0-pre.2
+flutter pub add maplibre:^0.4.0-pre.3
 ```
 
 Remove the Google API key from `AndroidManifest.xml`, `AppDelegate` and

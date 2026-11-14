@@ -23,7 +23,7 @@ each file instead of using both.
 
 ```bash
 flutter pub remove flutter_map latlong2
-flutter pub add maplibre:^0.4.0-pre.2
+flutter pub add maplibre:^0.4.0-pre.3
 ```
 
 Also remove the plugins that `maplibre` covers, such as `vector_map_tiles`,

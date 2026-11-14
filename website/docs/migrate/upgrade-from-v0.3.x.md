@@ -16,7 +16,7 @@ guide applies to the `0.4.0-pre.*` pre-releases and to 0.4.0. The
 
 ```yaml title="pubspec.yaml"
 dependencies:
-  maplibre: ^0.4.0-pre.2
+  maplibre: ^0.4.0-pre.3
 ```
 
 The packages need Dart 3.13 and Flutter 3.47 or newer.

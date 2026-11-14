@@ -1,4 +1,10 @@
-## Unreleased
+## 0.4.0-pre.3
+
+The third pre-release of 0.4 reworks the annotation layers, drops the Material
+dependency of the UI widgets, and fixes gestures and apps with a second Flutter
+engine. The
+[migration guide](https://josxha.github.io/flutter-maplibre/docs/migrate/upgrade-from-v0.3.x/)
+covers every change from 0.3.x and from the earlier pre-releases.
 
 ### Breaking Changes
 
@@ -42,7 +48,7 @@
   hold of one finger
   ([#681](https://github.com/josxha/flutter-maplibre/issues/681)).
 
-Full Changelog: [v0.4.0-pre.2...main](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...main)
+Full Changelog: [v0.4.0-pre.2...v0.4.0-pre.3](https://github.com/josxha/flutter-maplibre/compare/v0.4.0-pre.2...v0.4.0-pre.3)
 
 ## 0.4.0-pre.2
 

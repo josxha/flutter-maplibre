@@ -21,7 +21,7 @@ so replace the import in each file instead of using both.
 
 ```bash
 flutter pub remove maplibre_gl
-flutter pub add maplibre:^0.4.0-pre.2
+flutter pub add maplibre:^0.4.0-pre.3
 ```
 
 Follow [Platform setup](../getting-started/platforms.md) for each platform
