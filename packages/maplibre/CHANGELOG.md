@@ -25,6 +25,9 @@
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
 - `LayerFeatureEvent.feature` is the feature that a tap, hover or drag hit
   ([#674](https://github.com/josxha/flutter-maplibre/issues/674)).
+- `StyleController.setPlacementTransitions` turns the fade of labels whose
+  placement changes off and on
+  ([#611](https://github.com/josxha/flutter-maplibre/issues/611)).
 
 ### Bug Fixes
 

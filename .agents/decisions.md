@@ -505,6 +505,17 @@ Each entry: the decision, then why.
   update per frame re-encodes the data in Dart, parses and indexes it on the
   UI thread (`geojsonSourceDataCreate` is synchronous) and re-tiles the
   source; a paint change does none of that.
+- **`StyleController.setPlacementTransitions` mirrors the C API's
+  `StyleTransitionOptions.enablePlacementTransitions`.** Native keeps the
+  style's transition duration and delay. gl-js only takes `fadeDuration` as
+  a constructor option and keeps it in the private `_fadeDuration`, which it
+  reads on every frame, so web sets that field: 0 off, the map's own value
+  on. Honouring it only when the map is created would make the switch do
+  nothing on web afterwards; the integration test fails if gl-js renames the
+  field. A newly loaded style has them on again on both platforms. Native
+  fades over the style's transition duration, web over the map's 300 ms,
+  which gl-js also times pattern and dash crossfades with, so off ends those
+  too on web.
 
 ## Gestures
 

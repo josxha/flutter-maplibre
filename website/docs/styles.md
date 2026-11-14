@@ -68,3 +68,21 @@ that allows to customize existing styles or create a new style from scratch.
 Other tile providers like MapBox have own editors you can use.
 
 ![Maputnik Editor](../assets/images/maputnik.jpg)
+
+## Label placement transitions
+
+Labels fade in and out as their collisions with other labels change, over
+the style's `transition` duration on native (300 ms unless the style sets
+one) and over 300 ms on web. `setPlacementTransitions` turns the fade off, so
+labels show and hide at once:
+
+```dart
+MapLibreMap(
+  onStyleLoaded: (style) => style.setPlacementTransitions(enabled: false),
+)
+```
+
+A newly loaded style has them on again.
+
+On web, turning it off also ends the crossfade of `*-pattern` and
+`line-dasharray` values between zoom levels.
