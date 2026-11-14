@@ -1,6 +1,6 @@
 @file:Suppress("ktlint:standard:package-name")
 
-package com.github.josxha.maplibre_example
+package org.maplibre.maplibre_example
 
 import io.flutter.embedding.android.FlutterActivity
 

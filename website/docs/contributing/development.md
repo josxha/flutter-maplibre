@@ -15,7 +15,7 @@ so one `flutter pub get` in its root resolves every package. You need Flutter
 3.47 or newer:
 
 ```bash
-git clone https://github.com/josxha/flutter-maplibre
+git clone https://github.com/maplibre/flutter-maplibre
 cd flutter-maplibre
 flutter pub get
 cd examples
@@ -53,7 +53,7 @@ dart analyze --fatal-warnings --fatal-infos
 
 ## More
 
-[CONTRIBUTING.md](https://github.com/josxha/flutter-maplibre/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/maplibre/flutter-maplibre/blob/main/CONTRIBUTING.md)
 covers building the MapLibre Native C library locally, and
-[AGENTS.md](https://github.com/josxha/flutter-maplibre/blob/main/AGENTS.md)
+[AGENTS.md](https://github.com/maplibre/flutter-maplibre/blob/main/AGENTS.md)
 lists the code generation commands and the rules of the code base.

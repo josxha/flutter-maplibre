@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.github.josxha.maplibre_native"
+group = "org.maplibre.maplibre_native"
 version = "1.0-SNAPSHOT"
 
 allprojects {
@@ -13,7 +13,7 @@ allprojects {
 }
 
 android {
-    namespace = "com.github.josxha.maplibre_native"
+    namespace = "org.maplibre.maplibre_native"
 
     compileSdk = 36
 

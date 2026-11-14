@@ -11,7 +11,7 @@ icon: lucide/sparkles
 
     Version 0.4.0 is available as a pre-release,
     `0.4.0-pre.2`, while it is being tested. Please
-    [report bugs](https://github.com/josxha/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
+    [report bugs](https://github.com/maplibre/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
     you find. If you upgrade from 0.3.x, read the
     [migration guide](../migrate/upgrade-from-v0.3.x.md).
 
@@ -80,20 +80,20 @@ the other packages by version, so override them, too:
 dependencies:
   maplibre:
     git:
-      url: https://github.com/josxha/flutter-maplibre
+      url: https://github.com/maplibre/flutter-maplibre
       path: packages/maplibre
 
 dependency_overrides:
   maplibre_native:
     git:
-      url: https://github.com/josxha/flutter-maplibre
+      url: https://github.com/maplibre/flutter-maplibre
       path: packages/maplibre_native
   maplibre_platform_interface:
     git:
-      url: https://github.com/josxha/flutter-maplibre
+      url: https://github.com/maplibre/flutter-maplibre
       path: packages/maplibre_platform_interface
   maplibre_web:
     git:
-      url: https://github.com/josxha/flutter-maplibre
+      url: https://github.com/maplibre/flutter-maplibre
       path: packages/maplibre_web
 ```

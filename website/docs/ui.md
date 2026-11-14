@@ -25,7 +25,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-[styled map page of the example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/styled_map_page.dart)
+[styled map page of the example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/styled_map_page.dart)
 for a full implementation.
 
 All widgets inside the `children` List are within the `MapLibreMap` context and

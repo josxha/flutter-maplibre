@@ -18,13 +18,13 @@ server. `maplibre` needs no API key of its own and has no vendor lock-in.
 <div class="ml-hero__buttons" markdown>
 [Get started](docs/getting-started/setup.md){ .md-button .md-button--primary }
 [Live demo](demo/){ .md-button }
-[GitHub](https://github.com/josxha/flutter-maplibre){ .md-button }
+[GitHub](https://github.com/maplibre/flutter-maplibre){ .md-button }
 </div>
 
 <div class="ml-badges" markdown>
 [![Pub Version](https://img.shields.io/pub/v/maplibre?include_prereleases)](https://pub.dev/packages/maplibre)
 [![likes](https://img.shields.io/pub/likes/maplibre?logo=flutter)](https://pub.dev/packages/maplibre)
-[![stars](https://img.shields.io/github/stars/josxha/flutter-maplibre?style=flat&logo=github)](https://github.com/josxha/flutter-maplibre)
+[![stars](https://img.shields.io/github/stars/maplibre/flutter-maplibre?style=flat&logo=github)](https://github.com/maplibre/flutter-maplibre)
 [![Pub Downloads](https://img.shields.io/pub/dm/maplibre)](https://pub.dev/packages/maplibre)
 </div>
 
@@ -135,7 +135,7 @@ MapLibreMap(
 
 <p class="ml-section-lead">
 Every example runs in the <a href="demo/">live demo</a>, and its code is in the
-<a href="https://github.com/josxha/flutter-maplibre/tree/main/examples/lib">example app</a>.
+<a href="https://github.com/maplibre/flutter-maplibre/tree/main/examples/lib">example app</a>.
 </p>
 
 <div class="ml-gallery">
@@ -171,18 +171,18 @@ platform. See [Features](features/index.md) for what each platform supports.
 
 Contributions of any kind are welcome:
 
-- Star the project on [GitHub](https://github.com/josxha/flutter-maplibre) and
+- Star the project on [GitHub](https://github.com/maplibre/flutter-maplibre) and
   like it on [pub.dev](https://pub.dev/packages/maplibre).
-- [Share what you built](https://github.com/josxha/flutter-maplibre/discussions/categories/show-and-tell)
+- [Share what you built](https://github.com/maplibre/flutter-maplibre/discussions/categories/show-and-tell)
   and give feedback.
-- [Report bugs](https://github.com/josxha/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
-  or [request features](https://github.com/josxha/flutter-maplibre/issues/new?labels=feature&template=2-feature.yml).
+- [Report bugs](https://github.com/maplibre/flutter-maplibre/issues/new?labels=bug&template=1-bug.yml)
+  or [request features](https://github.com/maplibre/flutter-maplibre/issues/new?labels=feature&template=2-feature.yml).
 - Chat with us in `#flutter-maplibre` on the [OpenStreetMap US Slack](https://slack.openstreetmap.us).
 - Improve the code or the docs, see [Local development](docs/contributing/development.md).
-- Sponsor the project on [GitHub Sponsors](https://github.com/sponsors/josxha)
-  or [PayPal](https://www.paypal.com/paypalme/joschaeckert).
+- Sponsor MapLibre on [GitHub Sponsors](https://github.com/sponsors/maplibre)
+  or [Open Collective](https://opencollective.com/maplibre).
 
-[![List of contributors](https://contrib.rocks/image?repo=josxha/flutter-maplibre)](https://github.com/josxha/flutter-maplibre/graphs/contributors)
+[![List of contributors](https://contrib.rocks/image?repo=maplibre/flutter-maplibre)](https://github.com/maplibre/flutter-maplibre/graphs/contributors)
 
 <div class="ml-cta" markdown>
 [Get started](docs/getting-started/setup.md){ .md-button .md-button--primary }

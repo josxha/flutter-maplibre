@@ -14,8 +14,8 @@ Future<void> main() async {
   await JniGenerator(
     input: Input(
       classes: [
-        'com.github.josxha.maplibre_native.MaplibreNativeApi',
-        'com.github.josxha.maplibre_native.SurfaceListener',
+        'org.maplibre.maplibre_native.MaplibreNativeApi',
+        'org.maplibre.maplibre_native.SurfaceListener',
       ],
       backend: SummarizerBackend.asm,
       androidSdk: AndroidSdk(

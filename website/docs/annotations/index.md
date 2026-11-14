@@ -52,7 +52,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_circle_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/layers_circle_page.dart).
 
 ## Markers
 
@@ -108,7 +108,7 @@ that `.named()` and `.expression()` refer to come from the style, so add an
 image of your own again with `addImage` after another style loads.
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/layers_marker_page.dart).
 
 ## Polygons
 
@@ -146,7 +146,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_polygon_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/layers_polygon_page.dart).
 
 ## Polylines
 
@@ -181,7 +181,7 @@ Widget build(BuildContext context) {
 ```
 
 See the
-[example app](https://github.com/josxha/flutter-maplibre/blob/main/examples/lib/layers_polyline_page.dart).
+[example app](https://github.com/maplibre/flutter-maplibre/blob/main/examples/lib/layers_polyline_page.dart).
 
 ## Ids
 

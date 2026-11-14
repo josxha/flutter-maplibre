@@ -1,4 +1,4 @@
-package com.github.josxha.maplibre_native
+package org.maplibre.maplibre_native
 
 /**
  * Receives the Surface changes of a map texture. Dart implements it through

@@ -220,7 +220,7 @@ existing style can be copied as they are. See [Sources](../sources/index.md),
 | `style.addStyleImage`                        | `style.addImage` and the other `addImage*` methods        |
 | `queryRenderedFeatures`, `querySourceFeatures` | `controller.queryRenderedFeatures`, `controller.querySourceFeatures` |
 | `getGeoJsonClusterLeaves`, `getGeoJsonClusterChildren`, `getGeoJsonClusterExpansionZoom` | `controller.getClusterLeaves`, `getClusterChildren`, `getClusterExpansionZoom` |
-| `setFeatureState`                            | Not available yet ([#646](https://github.com/josxha/flutter-maplibre/issues/646)) |
+| `setFeatureState`                            | Not available yet ([#646](https://github.com/maplibre/flutter-maplibre/issues/646)) |
 
 ## 7. Offline
 
@@ -232,8 +232,8 @@ manager of Mapbox, but not on web. See [Offline & Cache](../offline.md).
 
 - Mapbox data and services: the Mapbox Standard style, search, navigation and
   the Mapbox terrain and satellite tiles. Use other providers for these.
-- 3D terrain, sky and 3D models ([#657](https://github.com/josxha/flutter-maplibre/issues/657)).
-- The globe projection, except on web ([#602](https://github.com/josxha/flutter-maplibre/issues/602)).
+- 3D terrain, sky and 3D models ([#657](https://github.com/maplibre/flutter-maplibre/issues/657)).
+- The globe projection, except on web ([#602](https://github.com/maplibre/flutter-maplibre/issues/602)).
 
 ## What `maplibre` adds
 

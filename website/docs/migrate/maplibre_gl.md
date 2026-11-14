@@ -231,7 +231,7 @@ be kept as they are while you migrate.
 | `addImage`                                      | `style.addImage` and `addImageFromAssets`, `addImageFromIconData`, `addImageFromWidget` |
 | `queryRenderedFeatures(point, layerIds, filter)`, `queryRenderedFeaturesInRect` | `controller.queryRenderedFeatures(.point(…) or .rect(…), layerIds:, filter:)` |
 | `querySourceFeatures`                           | `controller.querySourceFeatures`                             |
-| `setFeatureState`                               | Not available yet ([#646](https://github.com/josxha/flutter-maplibre/issues/646)) |
+| `setFeatureState`                               | Not available yet ([#646](https://github.com/maplibre/flutter-maplibre/issues/646)) |
 
 ## 6. Offline
 
