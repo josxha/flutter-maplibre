@@ -21,8 +21,8 @@ class StyleControllerNative extends StyleController implements StyleBackend {
   @override
   Future<void> setPlacementTransitions({required bool enabled}) async {
     final options = await _map.getStyleTransitionOptions();
-    // A style that loaded meanwhile has its own options, with them on.
-    if (_disposed) return;
+    // A style set meanwhile has its own options, with them on.
+    if (_replaced) return;
     await _map.setStyleTransitionOptions(
       options.copyWith(enablePlacementTransitions: enabled),
     );
@@ -39,6 +39,14 @@ class StyleControllerNative extends StyleController implements StyleBackend {
 
   List<String> _cachedAttributions = const [];
   var _disposed = false;
+
+  /// A newer style was set on the map, so the map's style commands no
+  /// longer reach this one.
+  bool get _replaced => _disposed || _replacedByNewer;
+  var _replacedByNewer = false;
+
+  /// Called when a newer style is set on the map, before its load is queued.
+  void markReplaced() => _replacedByNewer = true;
 
   /// Fills [layers] and [sources] from the style that the map loaded, and
   /// reads its attributions.
